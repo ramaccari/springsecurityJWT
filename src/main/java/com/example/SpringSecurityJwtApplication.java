@@ -53,10 +53,10 @@ public class SpringSecurityJwtApplication {
 			userService.createUser(userDTO);
 			
 			UserEntity userInvite = UserEntity.builder()
-					.email("invite@fibertel.com.ar")
-					.username("invite")
+					.email("invited@fibertel.com.ar")
+					.username("invited")
 					.password("1234")
-					.roles(Set.of(RoleEntity.builder().name(ERole.valueOf(ERole.INVITE.name()))
+					.roles(Set.of(RoleEntity.builder().name(ERole.valueOf(ERole.INVITED.name()))
 					.build()))
 					.build();
 			
