@@ -10,6 +10,6 @@ import com.example.models.UserEntity;
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
 	
-	public Optional<UserEntity> findByName(String name);
+	public Optional<UserEntity> findByUsername(String name);
 
 }

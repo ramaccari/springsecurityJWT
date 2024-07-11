@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.controllers.request.CreateUserDTO;
@@ -17,7 +18,10 @@ import com.example.service.UserService;
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	UserRepository userRepository;
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Override
 	public UserEntity createUser(CreateUserDTO createUserDTO) {
@@ -28,8 +32,8 @@ public class UserServiceImpl implements UserService {
 		
 		UserEntity userEntity = UserEntity.builder()
 				.email(createUserDTO.getEmail())
-				.name(createUserDTO.getName())
-				.password(createUserDTO.getPassword())
+				.username(createUserDTO.getUsername())
+				.password(passwordEncoder.encode(createUserDTO.getPassword()))
 				.roles(roles)
 				.build();
 		
