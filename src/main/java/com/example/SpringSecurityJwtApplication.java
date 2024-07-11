@@ -8,7 +8,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.controllers.request.CreateUserDTO;
 import com.example.models.ERole;
@@ -18,9 +17,6 @@ import com.example.service.UserService;
 
 @SpringBootApplication
 public class SpringSecurityJwtApplication {
-	
-	@Autowired
-	PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	UserService userService;
@@ -35,7 +31,7 @@ public class SpringSecurityJwtApplication {
 			UserEntity userAdmin = UserEntity.builder()
 					.email("rmaccari@fibertel.com.ar")
 					.username("rmaccari")
-					.password(passwordEncoder.encode("1234"))
+					.password("1234")
 					.roles(Set.of(RoleEntity.builder().name(ERole.valueOf(ERole.ADMIN.name()))
 					.build()))
 					.build();
@@ -47,7 +43,7 @@ public class SpringSecurityJwtApplication {
 			UserEntity userUser = UserEntity.builder()
 					.email("user@fibertel.com.ar")
 					.username("user")
-					.password(passwordEncoder.encode("1234"))
+					.password("1234")
 					.roles(Set.of(RoleEntity.builder().name(ERole.valueOf(ERole.USER.name()))
 					.build()))
 					.build();
@@ -59,7 +55,7 @@ public class SpringSecurityJwtApplication {
 			UserEntity userInvite = UserEntity.builder()
 					.email("invite@fibertel.com.ar")
 					.username("invite")
-					.password(passwordEncoder.encode("1234"))
+					.password("1234")
 					.roles(Set.of(RoleEntity.builder().name(ERole.valueOf(ERole.INVITE.name()))
 					.build()))
 					.build();
