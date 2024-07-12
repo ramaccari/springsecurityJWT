@@ -2,7 +2,6 @@ package com.example.models;
 
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -44,7 +43,7 @@ public class UserEntity {
 	@NotBlank
 	private String password;	
 
-	@ManyToMany(fetch = FetchType.EAGER, targetEntity = RoleEntity.class, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = RoleEntity.class)
 	@JoinTable(name = "User_Roles", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "RoleId"))
 	private Set<RoleEntity> roles;
 }

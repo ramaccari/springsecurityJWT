@@ -1,15 +1,11 @@
 package com.example.service.impl;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.controllers.request.CreateUserDTO;
-import com.example.models.ERole;
-import com.example.models.RoleEntity;
 import com.example.models.UserEntity;
 import com.example.repositories.UserRepository;
 import com.example.service.UserService;
@@ -24,21 +20,10 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public UserEntity createUser(CreateUserDTO createUserDTO) {
-		Set<RoleEntity> roles = createUserDTO.getRoles()
-				.stream()
-				.map(role -> RoleEntity.builder().name(ERole.valueOf(role)).build())
-				.collect(Collectors.toSet());
-		
-		UserEntity userEntity = UserEntity.builder()
-				.email(createUserDTO.getEmail())
-				.username(createUserDTO.getUsername())
-				.password(passwordEncoder.encode(createUserDTO.getPassword()))
-				.roles(roles)
-				.build();
-		
+	public Optional<UserEntity> createUser(UserEntity userEntity) {
+		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		userEntity = userRepository.save(userEntity);
-		return userEntity;
+		return Optional.of(userEntity);
 	}
 
 	@Override

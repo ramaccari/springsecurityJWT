@@ -1,11 +1,12 @@
 package com.example.service;
 
-import com.example.controllers.request.CreateUserDTO;
+import java.util.Optional;
+
 import com.example.models.UserEntity;
 
 public interface UserService {
 
-	public UserEntity createUser(CreateUserDTO createUserDTO);
+	public Optional<UserEntity> createUser(UserEntity userEntity);
 	
 	public String deleteUser(Long id);
 }
